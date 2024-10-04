@@ -1,18 +1,18 @@
 module mealy_overlap_10110(clk,rst,data_in,data_out);
-// Parameters
+	// State Parameters
 	parameter S0=0;
 	parameter S1=1;
 	parameter S10=2;
 	parameter S101=3;
 	parameter S1011=4;
 
-// Port directions
+	// Port directions
 	output reg data_out;
 	input clk;
 	input rst;
 	input data_in;
 
-// Internal registers
+	// Internal registers
 	reg [2:0]state;
 	reg flag;
 
