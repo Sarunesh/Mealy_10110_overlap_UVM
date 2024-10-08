@@ -10,6 +10,7 @@ class mealy_overlap_10110_mon extends uvm_monitor;
 
 	// Properties
 	virtual mealy_overlap_10110_intf vif;
+	mealy_overlap_10110_tx tx;
 
 	// build_phase
 	function void build_phase(uvm_phase phase);
@@ -19,4 +20,20 @@ class mealy_overlap_10110_mon extends uvm_monitor;
 		if(!uvm_config_db#(virtual mealy_overlap_10110_intf)::get(this,get_full_name(),"VIF",vif))
 			`uvm_fatal("MEALY_MON","Failed to read the interface from config db in mealy_overlap_10110_mon")
 	endfunction
+
+	// run_phase
+	task run_phase(uvm_phase phase);
+      int count;
+		`uvm_info("MEALY_MON","Inside run_phase of mealy_overlap_10110_mon",UVM_HIGH)
+		forever begin
+		wait(vif.rst==0);	
+          	@(vif.mon_cb);
+//        	$display("########### time=%0t rst=%0b count=%0d", $time, vif.rst, ++count);
+			tx=new();
+			tx.data_in = vif.mon_cb.data_in;
+			tx.data_out= vif.mon_cb.data_out;
+			tx.print();
+          	a_port.write(tx);
+		end
+	endtask
 endclass

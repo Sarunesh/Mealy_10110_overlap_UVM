@@ -19,7 +19,7 @@ class seq_n_random extends mealy_overlap_10110_seq_lib;
 	
 	// body task
 	task body();
-		int test_inQ[$]={1,0,1,1,0,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1};
+		int test_inQ[$]={0,1,0,1,1,0,1,1,0,1,1,1,0,1,1,0,1,1,1,0};
 		if(!uvm_config_db#(int)::get(null,get_full_name(),"COUNT",count))
 			`uvm_fatal("TEST_SEQ","Failed to read count from config db in seq_n_random")
 		`uvm_info("TEST_SEQ",$sformatf("Count=%0d",count),UVM_HIGH)

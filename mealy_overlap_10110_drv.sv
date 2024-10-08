@@ -29,9 +29,10 @@ class mealy_overlap_10110_drv extends uvm_driver#(mealy_overlap_10110_tx);
 
 	// drive_tx task
 	task drive_tx(mealy_overlap_10110_tx tx);
-		`uvm_info("MEALY_DRV","Driving the signals to interface",UVM_HIGH)
-		@(vif.drv_cb);
-		vif.drv_cb.data_in <= tx.data_in;
-		tx.data_out = vif.drv_cb.data_out;
+      	@(negedge vif.clk);
+//     	wait(vif.rst==0);
+      	`uvm_info("MEALY_DRV","Driving the signals to interface",UVM_HIGH)
+		vif.data_in = tx.data_in;
+		tx.data_out = vif.data_out;
 	endtask
 endclass
