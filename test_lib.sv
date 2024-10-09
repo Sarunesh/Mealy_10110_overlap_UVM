@@ -49,7 +49,7 @@ class test_n_random extends base_test;
 		`uvm_info("TEST", "Inside the run_phase of test", UVM_HIGH)
       	phase.raise_objection(this);
 		seq_n_random_obj.start(env.agent.sqr);
-      	phase.phase_done.set_drain_time(this,20);
+      	phase.phase_done.set_drain_time(this,10);
 		phase.drop_objection(this);
 	endtask
 endclass
