@@ -34,29 +34,49 @@ class base_test extends uvm_test;
 	endfunction
 endclass
 
-class test_n_random extends base_test;
+class test_n1_0_random extends base_test;
 	// Factory registration
-	`uvm_component_utils(test_n_random)
+	`uvm_component_utils(test_n1_0_random)
 
 	// Constructor
 	`NEW_COMPONENT
 
 	// run_phase
 	task run_phase(uvm_phase phase);
-		seq_n_random seq_n_random_obj;
-		seq_n_random_obj=new("seq_n_random_obj");
-      	uvm_config_db#(int)::set(this,"*","COUNT",20);
+		seq_n1_0_random seq_n1_0_random_obj;
+		seq_n1_0_random_obj=new("seq_n1_0_random_obj");
+      	uvm_config_db#(int)::set(this,"*","COUNT",30);
 		`uvm_info("TEST", "Inside the run_phase of test", UVM_HIGH)
       	phase.raise_objection(this);
-		seq_n_random_obj.start(env.agent.sqr);
+		seq_n1_0_random_obj.start(env.agent.sqr);
       	phase.phase_done.set_drain_time(this,10);
 		phase.drop_objection(this);
 	endtask
 endclass
 
-class test_random extends base_test;
+class test_n2_0_random extends base_test;
 	// Factory registration
-	`uvm_component_utils(test_random)
+	`uvm_component_utils(test_n2_0_random)
+
+	// Constructor
+	`NEW_COMPONENT
+
+	// run_phase
+	task run_phase(uvm_phase phase);
+		seq_n2_0_random seq_n2_0_random_obj;
+		seq_n2_0_random_obj=new("seq_n2_0_random_obj");
+      	uvm_config_db#(int)::set(this,"*","COUNT",30);
+		`uvm_info("TEST", "Inside the run_phase of test", UVM_HIGH)
+      	phase.raise_objection(this);
+		seq_n2_0_random_obj.start(env.agent.sqr);
+      	phase.phase_done.set_drain_time(this,10);
+		phase.drop_objection(this);
+	endtask
+endclass
+
+class test_random_50 extends base_test;
+	// Factory registration
+	`uvm_component_utils(test_random_50)
 
 	// Constructor
 	`NEW_COMPONENT
@@ -65,11 +85,11 @@ class test_random extends base_test;
 	task run_phase(uvm_phase phase);
 		seq_random seq_random_obj;
 		seq_random_obj=new("seq_random_obj");
-	    uvm_config_db#(int)::set(this,"*","COUNT",20);
+	    uvm_config_db#(int)::set(this,"*","COUNT",50);
 		`uvm_info("TEST", "Inside the run_phase of test", UVM_HIGH)
 		phase.raise_objection(this);
 		seq_random_obj.start(env.agent.sqr);
-      	phase.phase_done.set_drain_time(this,20);
+      	phase.phase_done.set_drain_time(this,10);
 		phase.drop_objection(this);
 	endtask
 endclass

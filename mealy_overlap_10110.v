@@ -19,7 +19,7 @@ module mealy_overlap_10110(clk,rst,data_in,data_out);
 	always@(posedge clk) begin
 		if(rst)begin
 			data_out=0;
-			state=S0;
+			//state=S0;
 		end
 		else begin                     // State change and Output assignment
 			flag=0;
@@ -46,6 +46,12 @@ module mealy_overlap_10110(clk,rst,data_in,data_out);
 						flag=1;
 					end
 					else state=S1;
+				end
+				default:begin
+					//state=S0;
+					//flag=0;
+					if(data_in) state=S1;
+					else state=state;
 				end
 			endcase
         	data_out=flag;

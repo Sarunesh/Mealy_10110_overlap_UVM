@@ -11,7 +11,7 @@ class mealy_overlap_10110_sbd extends uvm_scoreboard;
 	// Properties
 	mealy_overlap_10110_tx tx, tx_t;
 	bit sbd_start;
-	bit [2:0] state;
+	logic [2:0] state;
 	bit flag;
 	// State Parameters
 	parameter S0=0;
@@ -30,12 +30,13 @@ class mealy_overlap_10110_sbd extends uvm_scoreboard;
 	// run_phase
 	task run_phase(uvm_phase phase);
 		`uvm_info("MEALY_SBD", "Inside the run_phase of mealy_overlap_10110_sbd", UVM_HIGH)
-		state = S0;
+		//state = S0;
 		forever begin
 			wait(sbd_start==1);
 			tx_t = new();
 			tx_t.data_in = tx.data_in;
 			flag=0;
+			//$display("############# state=%0d", state);
 			case(state)
 				S0:begin
                   if(tx_t.data_in) state=S1;
@@ -59,6 +60,12 @@ class mealy_overlap_10110_sbd extends uvm_scoreboard;
 						flag=1;
 					end
 					else state=S1;
+				end
+				default:begin
+					//state=S0;
+					//flag=0;
+                  	if(tx_t.data_in) state=S1;
+					else state=state;
 				end
 			endcase
 			tx_t.data_out = flag;
